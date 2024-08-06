@@ -99,6 +99,7 @@
         
         const usdtInrData = data.usdtinr;
         const sellPrice = parseFloat(usdtInrData.sell);
+        const sellPrice = sellPrice - 2;
         const buyPrice = sellPrice - 2;
 
         document.getElementById('sell-price').textContent = sellPrice.toFixed(2);
