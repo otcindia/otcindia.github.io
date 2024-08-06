@@ -93,24 +93,35 @@
       </div>
     </div>
     <script>
-      async function fetchPrices() {
+  async function fetchPrices() {
     try {
         const response = await fetch('https://www.giottus.com/api/v2/ticker');
         const data = await response.json();
         
+        // Assuming 'usdtinr' is the correct data path and it contains 'sell' price.
         const usdtInrData = data.usdtinr;
-        const sellPrice = parseFloat(usdtInrData.sell);
-        const new_sellPrice = sellPrice - 2;
-        const buyPrice = new_sellPrice - 2;
+        
+        // Extract the original sell price from the data.
+        const originalSellPrice = parseFloat(usdtInrData.sell);
+        
+        // Calculate new sell price by subtracting a fee or spread.
+        const sellPrice = originalSellPrice - 2;
+        
+        // Calculate buy price by subtracting a larger fee or spread, ensuring it's lower than the sell price.
+        const buyPrice = originalSellPrice - 4;
 
-        document.getElementById('sell-price').textContent = new_sellPrice.toFixed(2);
+        // Update the webpage elements with the new prices.
+        document.getElementById('sell-price').textContent = sellPrice.toFixed(2);
         document.getElementById('buy-price').textContent = buyPrice.toFixed(2);
     } catch (error) {
         console.error('Failed to fetch prices:', error);
     }
   }
-    fetchPrices()
-    </script>
+
+  // Call the function to fetch and display prices.
+  fetchPrices();
+</script>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
