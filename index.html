@@ -101,7 +101,7 @@
         const usdtInrData = data.usdtinr;
         const sellPrice = parseFloat(usdtInrData.sell);
         const new_sellPrice = sellPrice - 2;
-        const buyPrice = sellPrice - 2;
+        const buyPrice = new_sellPrice - 2;
 
         document.getElementById('sell-price').textContent = new_sellPrice.toFixed(2);
         document.getElementById('buy-price').textContent = buyPrice.toFixed(2);
